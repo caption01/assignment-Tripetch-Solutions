@@ -6,8 +6,13 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/views/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/layouts/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      sm: { max: '480px' },
+      md: { max: '1023px', min: '481px' },
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
