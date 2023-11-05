@@ -1,7 +1,6 @@
-import { Headline, Topic, Content } from './common';
+import { Topic, Content } from './common';
 
 type BlockContent = {
-  headline: string;
   config?: any;
   topic?: ContentProps;
   content?: ContentProps;
@@ -19,21 +18,19 @@ const blockBgColorMap: Record<string, string> = {
   darkPurple: 'bg-darkPurple',
 };
 
-function BlockContent({ headline = '', config = {}, topic, content }: BlockContent) {
+function BlockContent({ config = {}, topic, content }: BlockContent) {
   const { bgColor: blockBgColor } = config;
 
   const bgColor = blockBgColorMap[blockBgColor];
 
   return (
     <div
-      className={`${bgColor} p-[6rem] pl-[50%] 
-        md:p-[3rem] md:pl-[33.333%]`}
+      className={`
+        ${bgColor} p-[6rem] pl-[50%] 
+        md:p-[3rem] md:pl-[30%]
+        sm:px-[3rem] sm:py-[6rem] sm:w-full sm:h-full
+        `}
     >
-      {headline ? (
-        <div className="mb-[6rem]">
-          <Headline>{headline}</Headline>
-        </div>
-      ) : null}
       {topic ? (
         <div className="mb-[2.1rem]">
           <Topic order={topic.order} config={topic.config}>

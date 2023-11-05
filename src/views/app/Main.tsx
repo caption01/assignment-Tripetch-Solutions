@@ -1,20 +1,25 @@
+import React, { useState } from 'react';
+import { useDrag, useGesture } from '@use-gesture/react';
 import Image, { StaticImageData } from 'next/image';
-import { map } from 'lodash';
-import { useScreen, SCREEN_TYPE } from '@/hooks';
+import { map, size } from 'lodash';
 
+import { useScreen, SCREEN_TYPE } from '@/hooks';
 import AthletsDesktop from '@public/assets/athlets-desktop.png';
 import AthletsTablet from '@public/assets/athlets-tablet.png';
+import AthletsMoblie from '@public/assets/athlets-mobile.png';
 
-import BlockContent from './components/BlockContent';
+import { Headline, BlockContent } from './components';
 
-const { DESKTOP, TABLET } = SCREEN_TYPE;
+const { DESKTOP, TABLET, PHONE, IDLE } = SCREEN_TYPE;
 
 const AlthletsImageMap: Record<string, StaticImageData> = {
   [DESKTOP]: AthletsDesktop,
   [TABLET]: AthletsTablet,
+  [PHONE]: AthletsMoblie,
+  [IDLE]: AthletsDesktop,
 };
 
-const contents = {
+const contents: Record<string, any[]> = {
   ATHLETS: [
     {
       id: 'ATHLETS-1',
@@ -76,36 +81,90 @@ const contents = {
   ],
 };
 
+function handleContentChange(currentState: any, section: string, next: number): number {
+  const startIndex = 0;
+  const lastIndex = size(contents[section]) - 1;
+  const currentIndex: number = currentState[section];
+
+  const swipeRightAtLimit = next > 0 && currentIndex === lastIndex;
+
+  if (swipeRightAtLimit) return startIndex;
+
+  const swipeLeftAtStart = next < 0 && currentIndex === startIndex;
+
+  if (swipeLeftAtStart) return lastIndex;
+
+  return currentIndex + next;
+}
+
 function Main() {
   const { screen } = useScreen();
+  const [current, setCurrent] = useState({
+    ATHLETS: 0,
+  });
 
   const althletsSrc = AlthletsImageMap[screen];
 
+  const isMobile = screen === PHONE;
+
+  const bind = useGesture(
+    {
+      onDragEnd: ({ movement: [mx], direction: [xDir], args }) => {
+        const [section] = args;
+        if (xDir === 1) {
+          setCurrent((curr: any): any => {
+            return {
+              ...curr,
+              [section]: handleContentChange(curr, section, -1),
+            };
+          });
+        } else if (xDir === -1) {
+          setCurrent((curr: any): any => {
+            return {
+              ...curr,
+              [section]: handleContentChange(curr, section, 1),
+            };
+          });
+        }
+      },
+    },
+    {
+      drag: {
+        threshold: 5,
+      },
+    },
+  );
+
   return (
-    <div
-      className="relative grid grid-cols-1 gap-0 
-      md:grid-cols-1 md:gap-0 
-      sm:grid-cols-1 sm:gap-0"
-    >
+    <div className="relative grid grid-cols-1 gap-0 ">
       <div
-        className="absolute top-[8rem] bottom-[8rem] w-1/2 h-full 
-        md:w-3/4 md:-left-[20%]
+        className="
+        bg-white pt-[6rem] pl-[50%] mb-[3rem] 
+        md:pl-[30%]
+        sm:grid sm:p-[3rem] sm:pl-[3rem] sm:mb-[24rem]
       "
       >
-        <Image src={althletsSrc} alt="AlthletsImage" fill objectFit="contain" />
+        <Headline>ATHLETS</Headline>
       </div>
-      {map(contents.ATHLETS, (block, index) => {
-        const firstItem = index === 0;
-        return (
-          <BlockContent
-            key={block.id}
-            headline={firstItem ? 'ATHLETS' : ''}
-            config={block.config}
-            topic={block.topic}
-            content={block.content}
-          />
-        );
-      })}
+      <div
+        className="
+          absolute top-[8rem] left-0 w-1/2 h-full 
+          md:w-3/4 md:-left-[20%]
+          sm:w-full sm:h-[30rem] sm:top-[16rem]
+        "
+      >
+        <Image src={althletsSrc} alt="AlthletsImage" fill style={{ objectFit: 'contain' }} />
+      </div>
+      <div className="sm:flex sm:w-full sm:h-[30rem] sm:overflow-hidden" {...bind('ATHLETS')}>
+        {map(contents.ATHLETS, (block, index) => {
+          const isActive = !isMobile || index === current['ATHLETS'];
+          return (
+            isActive && (
+              <BlockContent key={block.id} config={block.config} topic={block.topic} content={block.content} />
+            )
+          );
+        })}
+      </div>
     </div>
   );
 }

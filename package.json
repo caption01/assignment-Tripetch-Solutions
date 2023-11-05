@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.tsx\""
   },
   "dependencies": {
+    "@use-gesture/react": "^10.3.0",
     "lodash": "^4.17.21",
     "next": "14.0.1",
     "prettier": "^3.0.3",
