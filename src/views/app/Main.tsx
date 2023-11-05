@@ -1,7 +1,18 @@
-import { map, uniqueId } from 'lodash';
-import { useScreen, ScreenType } from '@/hooks';
+import Image, { StaticImageData } from 'next/image';
+import { map } from 'lodash';
+import { useScreen, SCREEN_TYPE } from '@/hooks';
+
+import AthletsDesktop from '@public/assets/athlets-desktop.png';
+import AthletsTablet from '@public/assets/athlets-tablet.png';
 
 import BlockContent from './components/BlockContent';
+
+const { DESKTOP, TABLET } = SCREEN_TYPE;
+
+const AlthletsImageMap: Record<string, StaticImageData> = {
+  [DESKTOP]: AthletsDesktop,
+  [TABLET]: AthletsTablet,
+};
 
 const contents = {
   ATHLETS: [
@@ -68,8 +79,21 @@ const contents = {
 function Main() {
   const { screen } = useScreen();
 
+  const althletsSrc = AlthletsImageMap[screen];
+
   return (
-    <div className="grid grid-cols-1 gap-0 md:grid-cols-3 md:gap-4 sm:grid-cols-1 sm:gap-0">
+    <div
+      className="relative grid grid-cols-1 gap-0 
+      md:grid-cols-1 md:gap-0 
+      sm:grid-cols-1 sm:gap-0"
+    >
+      <div
+        className="absolute top-[8rem] bottom-[8rem] w-1/2 h-full 
+        md:w-3/4 md:-left-[20%]
+      "
+      >
+        <Image src={althletsSrc} alt="AlthletsImage" fill objectFit="contain" />
+      </div>
       {map(contents.ATHLETS, (block, index) => {
         const firstItem = index === 0;
         return (

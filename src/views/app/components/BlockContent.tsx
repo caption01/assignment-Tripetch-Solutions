@@ -25,7 +25,10 @@ function BlockContent({ headline = '', config = {}, topic, content }: BlockConte
   const bgColor = blockBgColorMap[blockBgColor];
 
   return (
-    <div className={`${bgColor} p-[6rem]`}>
+    <div
+      className={`${bgColor} p-[6rem] pl-[50%] 
+        md:p-[3rem] md:pl-[33.333%]`}
+    >
       {headline ? (
         <div className="mb-[6rem]">
           <Headline>{headline}</Headline>
