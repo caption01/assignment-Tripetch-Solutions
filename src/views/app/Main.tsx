@@ -111,6 +111,7 @@ function Main() {
     {
       onDragEnd: ({ movement: [mx], direction: [xDir], args }) => {
         const [section] = args;
+        console.log('Drag!!');
         if (xDir === 1) {
           setCurrent((curr: any): any => {
             return {
@@ -136,26 +137,26 @@ function Main() {
   );
 
   return (
-    <div className="relative grid grid-cols-1 gap-0 ">
+    <div className="relative grid grid-cols-1 gap-0">
       <div
         className="
-        bg-white pt-[6rem] pl-[50%] mb-[3rem] 
-        md:pl-[30%]
-        sm:grid sm:p-[3rem] sm:pl-[3rem] sm:mb-[24rem]
-      "
+          bg-white pt-[6rem] pl-[50%] mb-[3rem] 
+          md:pl-[30%]
+          sm:grid sm:p-[3rem] sm:pl-[3rem] sm:mb-[24rem]
+        "
       >
         <Headline>ATHLETS</Headline>
       </div>
       <div
         className="
-          absolute top-[8rem] left-0 w-1/2 h-full 
+          absolute top-[8rem] left-0 w-1/2 h-full z-10
           md:w-3/4 md:-left-[20%]
           sm:w-full sm:h-[30rem] sm:top-[16rem]
         "
       >
         <Image src={althletsSrc} alt="AlthletsImage" fill style={{ objectFit: 'contain' }} />
       </div>
-      <div className="sm:flex sm:w-full sm:h-[30rem] sm:overflow-hidden" {...bind('ATHLETS')}>
+      <div className="relative sm:flex sm:w-full sm:h-[30rem] sm:overflow-hidden sm:z-0" {...bind('ATHLETS')}>
         {map(contents.ATHLETS, (block, index) => {
           const isActive = !isMobile || index === current['ATHLETS'];
           return (
@@ -164,6 +165,19 @@ function Main() {
             )
           );
         })}
+        <div className="absolute bottom-[10%] left-[50%] -translate-x-[50%] flex gap-[1rem]">
+          {map(contents.ATHLETS, (block, index) => {
+            const blockBgColorMap: Record<string, string> = {
+              white: 'bg-white',
+              whitePurple: 'bg-whitePurple',
+              darkPurple: 'bg-darkPurple',
+            };
+            const isActive = !isMobile || index === current['ATHLETS'];
+            const dotColorConfig = block.topic.config.underLineColor;
+            const dotColor = !isActive ? 'bg-grey' : blockBgColorMap[dotColorConfig];
+            return <div className={`w-[1rem] h-[1rem] ${dotColor} rounded-full`} />;
+          })}
+        </div>
       </div>
     </div>
   );
