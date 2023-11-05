@@ -19,6 +19,7 @@ const config: Config = {
         grey: '#D8D8D8',
         whitePurple: '#F5F4F9',
         darkPurple: '#5E3DB3',
+        blackPurple: '#090C35',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

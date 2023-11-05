@@ -1,92 +1,17 @@
 import React, { useState } from 'react';
 import { useGesture } from '@use-gesture/react';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { map, size } from 'lodash';
 
 import { SCREEN_TYPE } from '@/hooks';
 import { ScreenContext } from '@/contexts';
+import { AlthletsImageMap, PlayerImageMap, contents } from './helper';
+
+const { PHONE } = SCREEN_TYPE;
 
 const { useScreenContext } = ScreenContext;
 
-import AthletsDesktop from '@public/assets/athlets-desktop.png';
-import AthletsTablet from '@public/assets/athlets-tablet.png';
-import AthletsMoblie from '@public/assets/athlets-mobile.png';
-
 import { Headline, BlockContent } from './components';
-
-const { DESKTOP, TABLET, PHONE, IDLE } = SCREEN_TYPE;
-
-const AlthletsImageMap: Record<string, StaticImageData> = {
-  [DESKTOP]: AthletsDesktop,
-  [TABLET]: AthletsTablet,
-  [PHONE]: AthletsMoblie,
-  [IDLE]: AthletsDesktop,
-};
-
-const contents: Record<string, any[]> = {
-  ATHLETS: [
-    {
-      id: 'ATHLETS-1',
-      config: {
-        bgColor: 'bg-white',
-      },
-      topic: {
-        order: 1,
-        body: 'CONNECTION',
-        config: {
-          dotColor: 'bg-darkPurple',
-          underLineColor: 'after:bg-darkPurple',
-        },
-      },
-      content: {
-        body: 'Connect with coaches directly, you can ping coaches to view profile.',
-        config: {
-          fontColor: 'text-black',
-        },
-      },
-    },
-    {
-      id: 'ATHLETS-2',
-      config: {
-        bgColor: 'bg-whitePurple',
-      },
-      topic: {
-        order: 2,
-        body: 'COLLABORATION',
-        config: {
-          dotColor: 'bg-darkPurple',
-          underLineColor: 'after:bg-darkPurple',
-        },
-      },
-      content: {
-        body: 'Work with other student athletes to increase visibility. When you share and like other players videos it will increase your visibility as a player. This is the team work aspect to Surface 1.',
-        config: {
-          fontColor: 'text-black',
-        },
-      },
-    },
-    {
-      id: 'ATHLETS-3',
-      config: {
-        bgColor: 'bg-darkPurple',
-      },
-      topic: {
-        order: 3,
-        body: 'GROWTH',
-        config: {
-          dotColor: 'bg-white',
-          underLineColor: 'after:bg-white',
-        },
-      },
-      content: {
-        body: 'Resources and tools for you to get better as a student Athelte. Access to training classes, tutor sessions, etc.',
-        config: {
-          fontColor: 'text-white',
-        },
-      },
-    },
-  ],
-};
 
 function handleContentChange(currentState: any, section: string, next: number): number {
   const startIndex = 0;
@@ -112,6 +37,7 @@ function Main() {
   });
 
   const althletsSrc = AlthletsImageMap[screen];
+  const playerSrc = PlayerImageMap[screen];
 
   const isMobile = screen === PHONE;
 
