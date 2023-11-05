@@ -148,8 +148,8 @@ function Main() {
     <div className="relative grid grid-cols-1 gap-0">
       <div
         className="
-          bg-white pt-[6rem] pl-[50%] mb-[3rem] 
-          md:pl-[30%]
+          bg-white pt-[2.4rem] pb-[0rem] pl-[50%]
+          md:pt-[8rem] md:pb-[0rem] md:pl-[30%]
           sm:grid sm:p-[3rem] sm:pl-[3rem] sm:mb-[24rem]
         "
       >
@@ -158,8 +158,8 @@ function Main() {
       <div
         className="
           absolute top-[8rem] left-0 w-1/2 h-full z-10
-          md:w-3/4 md:-left-[20%]
-          sm:w-full sm:h-[30rem] sm:top-[16rem]
+          md:w-1/2 md:-left-[10%]
+          sm:w-full sm:h-[30rem] sm:top-[11rem]
         "
       >
         <Image src={althletsSrc} alt="AlthletsImage" fill style={{ objectFit: 'contain' }} />

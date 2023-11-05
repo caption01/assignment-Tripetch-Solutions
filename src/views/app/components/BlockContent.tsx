@@ -18,8 +18,8 @@ function BlockContent({ config = {}, topic, content }: BlockContent) {
   return (
     <div
       className={`
-        ${bgColor} p-[6rem] pl-[50%] 
-        md:p-[3rem] md:pl-[30%]
+        ${bgColor} pt-[6rem] pb-[6rem] pl-[50%]
+        md:pt-[5rem] md:pb-[6rem] md:pl-[30%]
         sm:px-[3rem] sm:py-[6rem] sm:w-full sm:h-full
         `}
     >
