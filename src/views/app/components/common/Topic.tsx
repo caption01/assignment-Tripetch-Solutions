@@ -1,15 +1,22 @@
+import { ScreenContext } from '@/contexts';
+import { SCREEN_TYPE } from '@/hooks';
 import { Typography } from '@/components/common';
 
-const underLineColorMap: Record<string, string> = {
-  white: 'after:bg-white',
-  darkPurple: 'after:bg-darkPurple',
+const { useScreenContext } = ScreenContext;
+
+const fontSizeMap = {
+  [SCREEN_TYPE.DESKTOP]: 'text-[3.6rem]',
+  [SCREEN_TYPE.TABLET]: 'text-[3.6rem]',
+  [SCREEN_TYPE.PHONE]: 'text-[2.8rem]',
+  [SCREEN_TYPE.IDLE]: 'text-[3.6rem]',
 };
 
 function Topic(props: any) {
+  const { screen } = useScreenContext();
   const { children, order, config = {} } = props;
-  const { underLineColor: lineColor } = config;
+  const { underLineColor } = config;
 
-  const underLineColor = underLineColorMap[lineColor];
+  const fontSize = fontSizeMap[screen];
 
   return (
     <div className="flex gap-[1rem]">
@@ -21,7 +28,7 @@ function Topic(props: any) {
       >
         {`0${order}`}
       </div>
-      <Typography size="topic" color="darkGray" space="topic">
+      <Typography fontSize={fontSize} fontColor="text-darkGray" letterSpace="tracking-[0.15rem]">
         {children}
       </Typography>
     </div>

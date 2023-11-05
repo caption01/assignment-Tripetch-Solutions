@@ -12,16 +12,8 @@ type ContentProps = {
   config?: any;
 };
 
-const blockBgColorMap: Record<string, string> = {
-  white: 'bg-white',
-  whitePurple: 'bg-whitePurple',
-  darkPurple: 'bg-darkPurple',
-};
-
 function BlockContent({ config = {}, topic, content }: BlockContent) {
-  const { bgColor: blockBgColor } = config;
-
-  const bgColor = blockBgColorMap[blockBgColor];
+  const { bgColor } = config;
 
   return (
     <div

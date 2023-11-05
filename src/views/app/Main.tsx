@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { useDrag, useGesture } from '@use-gesture/react';
+import { useGesture } from '@use-gesture/react';
 import Image, { StaticImageData } from 'next/image';
 import { map, size } from 'lodash';
 
-import { useScreen, SCREEN_TYPE } from '@/hooks';
+import { SCREEN_TYPE } from '@/hooks';
+import { ScreenContext } from '@/contexts';
+
+const { useScreenContext } = ScreenContext;
+
 import AthletsDesktop from '@public/assets/athlets-desktop.png';
 import AthletsTablet from '@public/assets/athlets-tablet.png';
 import AthletsMoblie from '@public/assets/athlets-mobile.png';
@@ -24,57 +28,60 @@ const contents: Record<string, any[]> = {
     {
       id: 'ATHLETS-1',
       config: {
-        bgColor: 'white',
+        bgColor: 'bg-white',
       },
       topic: {
         order: 1,
         body: 'CONNECTION',
         config: {
-          underLineColor: 'darkPurple',
+          dotColor: 'bg-darkPurple',
+          underLineColor: 'after:bg-darkPurple',
         },
       },
       content: {
         body: 'Connect with coaches directly, you can ping coaches to view profile.',
         config: {
-          fontColor: 'black',
+          fontColor: 'text-black',
         },
       },
     },
     {
       id: 'ATHLETS-2',
       config: {
-        bgColor: 'whitePurple',
+        bgColor: 'bg-whitePurple',
       },
       topic: {
         order: 2,
         body: 'COLLABORATION',
         config: {
-          underLineColor: 'darkPurple',
+          dotColor: 'bg-darkPurple',
+          underLineColor: 'after:bg-darkPurple',
         },
       },
       content: {
         body: 'Work with other student athletes to increase visibility. When you share and like other players videos it will increase your visibility as a player. This is the team work aspect to Surface 1.',
         config: {
-          fontColor: 'black',
+          fontColor: 'text-black',
         },
       },
     },
     {
       id: 'ATHLETS-3',
       config: {
-        bgColor: 'darkPurple',
+        bgColor: 'bg-darkPurple',
       },
       topic: {
         order: 3,
         body: 'GROWTH',
         config: {
-          underLineColor: 'white',
+          dotColor: 'bg-white',
+          underLineColor: 'after:bg-white',
         },
       },
       content: {
         body: 'Resources and tools for you to get better as a student Athelte. Access to training classes, tutor sessions, etc.',
         config: {
-          fontColor: 'white',
+          fontColor: 'text-white',
         },
       },
     },
@@ -98,7 +105,8 @@ function handleContentChange(currentState: any, section: string, next: number): 
 }
 
 function Main() {
-  const { screen } = useScreen();
+  const { screen } = useScreenContext();
+
   const [current, setCurrent] = useState({
     ATHLETS: 0,
   });
@@ -165,19 +173,16 @@ function Main() {
             )
           );
         })}
-        <div className="absolute bottom-[10%] left-[50%] -translate-x-[50%] flex gap-[1rem]">
-          {map(contents.ATHLETS, (block, index) => {
-            const blockBgColorMap: Record<string, string> = {
-              white: 'bg-white',
-              whitePurple: 'bg-whitePurple',
-              darkPurple: 'bg-darkPurple',
-            };
-            const isActive = !isMobile || index === current['ATHLETS'];
-            const dotColorConfig = block.topic.config.underLineColor;
-            const dotColor = !isActive ? 'bg-grey' : blockBgColorMap[dotColorConfig];
-            return <div className={`w-[1rem] h-[1rem] ${dotColor} rounded-full`} />;
-          })}
-        </div>
+        {isMobile ? (
+          <div className="absolute bottom-[10%] left-[50%] -translate-x-[50%] flex gap-[1rem]">
+            {map(contents.ATHLETS, (block, index) => {
+              const isActive = index === current['ATHLETS'];
+              const dotColorConfig = block.topic.config.dotColor;
+              const dotColor = !isActive ? 'bg-grey' : dotColorConfig;
+              return <div key={index} className={`w-[1rem] h-[1rem] ${dotColor} rounded-full`} />;
+            })}
+          </div>
+        ) : null}
       </div>
     </div>
   );
