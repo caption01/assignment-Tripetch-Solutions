@@ -39,7 +39,7 @@ function BlockContent({ position = 'right', config = {}, topic, content }: Block
         </div>
       ) : null}
       {content ? (
-        <div className="max-w-[120ch] md:max-w-[80ch]">
+        <div className="max-w-[120ch] lg:max-w-[100ch] md:max-w-[80ch]">
           <Content config={content.config}>{content.body}</Content>
         </div>
       ) : null}

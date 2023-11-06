@@ -25,10 +25,11 @@ const calculateScreenType = (windowSize: number): ScreenType => {
 };
 
 export function useScreen() {
-  if (typeof window === 'undefined')
+  if (typeof window === 'undefined') {
     return {
       screen: IDLE,
     };
+  }
 
   const [windowWidth, setWindowSize] = useState(window.innerWidth);
 

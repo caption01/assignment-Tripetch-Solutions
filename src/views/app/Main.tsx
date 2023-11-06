@@ -9,7 +9,7 @@ import { ScreenContext } from '@/contexts';
 import { Headline, BlockContent, DotPagination } from './components';
 import { AlthletsImageMap, PlayerImageMap, contents } from './helper';
 
-const { PHONE } = SCREEN_TYPE;
+const { PHONE, IDLE } = SCREEN_TYPE;
 
 const ATHLETS = 'ATHLETS';
 const PLAYERS = 'PLAYERS';
@@ -34,6 +34,8 @@ function handleContentChange(currentState: any, section: string, next: number): 
 
 function Main() {
   const { screen } = useScreenContext();
+
+  if (screen === IDLE) return <div />;
 
   const [current, setCurrent] = useState({
     [ATHLETS]: 0,
@@ -71,8 +73,9 @@ function Main() {
         <div
           className="absolute z-10
             top-[8rem] left-[5%] w-[70rem] h-[100%]
+            lg:top-[8rem] lg:left-[5rem] lg:w-[50rem] lg:h-[90%]
             md:top-[8rem] md:-left-[10rem] md:w-[50rem] md:h-[90%]
-            sm:w-full sm:h-[30rem] sm:top-[11rem]
+            sm:top-[11rem] sm:left-[0%] sm:w-full sm:h-[30rem] 
           "
         >
           <Image src={althletsSrc} alt="AlthletsImage" fill style={{ objectFit: 'contain' }} />
@@ -98,6 +101,7 @@ function Main() {
         <div
           className="absolute z-10
             top-[0rem] right-[5%] w-[70rem] h-[100%]
+            lg:top-[5rem] lg:right-[0rem] lg:w-[65rem] lg:h-[80%]
             md:top-[5rem] md:right-[0rem] md:w-[50rem] md:h-[80%]
             sm:w-full sm:h-[30rem] sm:top-[11rem]
           "
