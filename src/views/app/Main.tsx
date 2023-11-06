@@ -88,9 +88,9 @@ function Main() {
           <Headline>ATHLETS</Headline>
         </div>
         <div
-          className="absolute z-10 h-full
+          className="absolute z-10 h-[100%]
             top-[8rem] left-[0rem] w-[70rem]
-            md:top-[8rem] md:-left-[10rem] md:w-[50rem]
+            md:top-[8rem] md:-left-[10rem] md:w-[50rem] md:h-[90%]
             sm:w-full sm:h-[30rem] sm:top-[11rem]
           "
         >
@@ -135,9 +135,9 @@ function Main() {
           <Headline>PLAYERS</Headline>
         </div>
         <div
-          className="absolute z-10 h-full
+          className="absolute z-10 h-[100%]
             top-[0rem] right-[0rem] w-[70rem]
-            md:-top-[5rem] md:right-[0rem] md:w-[50rem]
+            md:top-[5rem] md:right-[0rem] md:w-[50rem] md:h-[80%]
             sm:w-full sm:h-[30rem] sm:top-[11rem]
           "
         >
