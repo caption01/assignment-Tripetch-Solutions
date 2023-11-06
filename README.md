@@ -6,6 +6,10 @@
 
 ### Project Description
 
+Owner: Nutchapon Hanouypornlert
+
+Email: nutchapon.han@gmail.com
+
 As requirement to create one single page with responsive display using any framework.
 
 I've choose **NextJs** to create this project and using **Tailwind** to styling our project
