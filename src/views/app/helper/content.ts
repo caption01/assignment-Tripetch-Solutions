@@ -38,7 +38,8 @@ export const contents: Record<string, any[]> = {
         body: 'CONNECTION',
         config: {
           dotColor: 'bg-darkPurple',
-          underLineColor: 'after:bg-darkPurple',
+          afterUnderLineColor: 'after:bg-darkPurple',
+          afterFontColor: 'text-black',
         },
       },
       content: {
@@ -58,7 +59,8 @@ export const contents: Record<string, any[]> = {
         body: 'COLLABORATION',
         config: {
           dotColor: 'bg-darkPurple',
-          underLineColor: 'after:bg-darkPurple',
+          afterUnderLineColor: 'after:bg-darkPurple',
+          afterFontColor: 'text-black',
         },
       },
       content: {
@@ -78,7 +80,8 @@ export const contents: Record<string, any[]> = {
         body: 'GROWTH',
         config: {
           dotColor: 'bg-white',
-          underLineColor: 'after:bg-white',
+          afterUnderLineColor: 'after:bg-white',
+          afterFontColor: 'text-black',
         },
       },
       content: {
@@ -100,7 +103,8 @@ export const contents: Record<string, any[]> = {
         body: 'CONNECTION',
         config: {
           dotColor: 'bg-darkPurple',
-          underLineColor: 'after:bg-darkPurple',
+          afterUnderLineColor: 'after:bg-darkPurple',
+          afterFontColor: 'text-black',
         },
       },
       content: {
@@ -120,7 +124,8 @@ export const contents: Record<string, any[]> = {
         body: 'COLLABORATION',
         config: {
           dotColor: 'bg-darkPurple',
-          underLineColor: 'after:bg-darkPurple',
+          afterUnderLineColor: 'after:bg-darkPurple',
+          afterFontColor: 'text-black',
         },
       },
       content: {
@@ -140,7 +145,8 @@ export const contents: Record<string, any[]> = {
         body: 'GROWTH',
         config: {
           dotColor: 'bg-white',
-          underLineColor: 'after:bg-white',
+          afterUnderLineColor: 'after:bg-white',
+          afterFontColor: 'text-pinkPurple',
         },
       },
       content: {

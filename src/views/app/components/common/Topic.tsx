@@ -14,7 +14,7 @@ const fontSizeMap = {
 function Topic(props: any) {
   const { screen } = useScreenContext();
   const { children, order, config = {} } = props;
-  const { underLineColor } = config;
+  const { afterUnderLineColor, afterFontColor } = config;
 
   const fontSize = fontSizeMap[screen];
 
@@ -22,9 +22,9 @@ function Topic(props: any) {
     <div className="flex gap-[1rem]">
       <div
         className={`
-          text-[1.8rem] relative pt-[0.5rem] font-normal
+          text-[1.8rem] relative pt-[0.5rem] font-normal ${afterFontColor}
           after:absolute after:left-0 after:bottom-[20%] 
-          ${underLineColor} after:content-[''] after:w-full 
+          ${afterUnderLineColor} after:content-[''] after:w-full 
           after:h-[0.5rem] after:rounded-[0.25rem]
 
           sm:text-[1.4rem] sm:after:h-[0.4rem]
